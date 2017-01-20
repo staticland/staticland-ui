@@ -22,7 +22,7 @@ module.exports = function (state, prev, send) {
 
 
         <h3 class="f6 ttu dark-gray">Password</h3>
-        <p>This is description text</p>
+        <p>Receive an email to reset your password:</p>
         <button class="pa3 bg-light-gray hover-bg-gray hover-white pointer bn ba0" onclick=${onclick}>Reset your password now</button>
       </div>`
     }
