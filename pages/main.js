@@ -6,6 +6,12 @@ var login = require('../elements/login-form')
 var logout = require('../elements/logout-button')
 var register = require('../elements/register-form')
 
+var commands = html`<pre class="pa4 white bg-dark-gray"><code>npm i -g staticland
+staticland register
+staticland path/to/files example.com
+</code></pre>
+`
+
 module.exports = function (state, prev, send) {
   var authenticated = state.account.authenticated
   var list = state.sites.list
@@ -21,12 +27,23 @@ module.exports = function (state, prev, send) {
 
   if (authenticated) {
     if (fetchedList) {
+      var elements
+
+      if (list.length) {
+        elements = html`<di>${list.map(function (item) {
+          return html`<a href="/site?domain=${item.domain}"><h3 class="f3 dark-gray">${item.domain}</h1></a>`
+        })}</div>`
+      } else {
+        elements = html`<div>
+          <h3 class="f3 dark-gray">No sites yet! Deploy one!</h3>
+          ${commands}
+          <p><a href="https://docs.static.land" class="link blue hover-dark-blue">Read the docs for more info</a></p>
+        </div>`
+      }
+
       return html`<div class="">
         <h2 class="f2 ttu dark-gray">Sites</h2>
-
-        ${list.map(function (item) {
-          return html`<a href="/site?domain=${item.domain}"><h3 class="f3 dark-gray">${item.domain}</h1></a>`
-        })}
+        ${elements}
       </div>`
     } else {
       send('sites:list')
