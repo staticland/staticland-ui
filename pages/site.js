@@ -14,7 +14,7 @@ module.exports = function (state, prev, send) {
   var site = state.sites.currentSite
   var ready = authenticated && fetchedSite && !fetching
 
-  console.log('fetching', fetching, 'fetched', fetchedSite)
+
 
   var prefix = css`
     :host {
@@ -23,10 +23,25 @@ module.exports = function (state, prev, send) {
     }
   `
 
+  function onclickConfirm (e) {
+    e.preventDefault()
+    send('sites:confirmDestroyingSite', true)
+  }
+
   function onclickDestroySite (e) {
     e.preventDefault()
     send('sites:destroySite', domain)
   }
+
+  var destroyAreYouSure = html`<div class="pa2 bg-near-white hover-bg-washed-yellow">
+  <p>Do you really want to delete your work? Do you have the source fies saved somewhere?</p>
+  <p class="mt4"><a class="link pa2 bg-washed-red hover-bg-light-red white mb4 pointer" onclick=${onclickConfirm}>I'm ready to delete ${domain}?</a></p>
+  </div>`
+
+  var destroyForReal = html`<div class="pa2 bg-washed-red">
+    <p>There's no going back from this. If you click that delete button, ${domain} is gone forever.</p>
+    <p class="mt4"><a class="link pa2 bg-red hover-bg-dark-red white mb4 pointer" onclick=${onclickDestroySite}>Yes I really want to delete ${domain}</a></p>
+  </div>`
 
   if (!fetching && !fetchedSite) {
     send('sites:site', domain)
@@ -47,8 +62,10 @@ module.exports = function (state, prev, send) {
       <p><b>Deploys:</b> ${site.deploys}</p>
 
       <h3 class="f3 dark-gray mt5">Delete this site</h3>
-      <p>There's no going back from this. If you delete this site, it is gone forever.</p>
-      <p class="mt4"><a class="link pa2 bg-red hover-bg-dark-red white mb4" onclick=${onclickDestroySite}>Delete ${domain}</a></p>
+      ${state.sites.confirmDestroyingSite === true 
+        ? destroyForReal
+        : destroyAreYouSure
+      }
     </div>`
   } 
 }

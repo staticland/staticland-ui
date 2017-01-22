@@ -12,7 +12,9 @@ module.exports = function (config) {
       fetchedList: false,
       currentSite: null,
       fetchedSite: false,
-      fetchingSite: false
+      fetchingSite: false,
+      destroyingSite: false,
+      confirmDestroyingSite: null
     },
     reducers: {
       setList: function (state, data) {
@@ -28,8 +30,11 @@ module.exports = function (config) {
       fetchingSite: function (state, data) {
         return { fetchingSite: data }
       },
+      confirmDestroyingSite: function (state, data) {
+        return { confirmDestroyingSite: data }
+      },
       destroyingSite: function (state, data) {
-        return { destroyingSite: data }
+        return { destroyingSite: data, confirmDestroyingSite: null }
       },
       setCurrentSite: function (state, data) {
         return { currentSite: data, fetchedSite: true }
