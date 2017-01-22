@@ -35,12 +35,12 @@ module.exports = function (state, prev, send) {
 
   var destroyAreYouSure = html`<div class="pa2 bg-near-white hover-bg-washed-yellow">
   <p>Do you really want to delete your work? Do you have the source fies saved somewhere?</p>
-  <p class="mt4"><a class="link pa2 bg-washed-red hover-bg-light-red white mb4 pointer" onclick=${onclickConfirm}>I'm ready to delete ${domain}?</a></p>
+  <p class="mt4"><a class="link pa2 bg-washed-red hover-bg-light-red white mb4 pointer" onclick=${onclickConfirm}>I'm ready to delete ${domain}</a></p>
   </div>`
 
   var destroyForReal = html`<div class="pa2 bg-washed-red">
     <p>There's no going back from this. If you click that delete button, ${domain} is gone forever.</p>
-    <p class="mt4"><a class="link pa2 bg-red hover-bg-dark-red white mb4 pointer" onclick=${onclickDestroySite}>Yes I really want to delete ${domain}</a></p>
+    <p class="mt4"><a class="link pa2 bg-red hover-bg-dark-red white mb4 pointer" onclick=${onclickDestroySite}>Yes I really want to delete ${domain}!</a></p>
   </div>`
 
   if (!fetching && !fetchedSite) {
