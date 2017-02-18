@@ -35,7 +35,7 @@ module.exports = function (state, prev, send) {
   }
 
   var destroyAreYouSure = html`<div class="ph3 pv2 hover-bg-washed-yellow ba b--light-gray">
-  <p>Do you really want to delete your work? Do you have the source fies saved somewhere?</p>
+  <p>Do you really want to delete your work? Do you have the source files saved somewhere?</p>
   <p class="mt4"><a class="link pa2 bg-washed-red hover-bg-light-red white mb4 pointer" onclick=${onclickConfirm}>I'm ready to delete ${domain}</a></p>
   </div>`
 
